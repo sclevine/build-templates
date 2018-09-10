@@ -10,20 +10,19 @@ The Cloud Native Buildpacks website describes v3 buildpacks as:
 > image format. They take advantage of the latest capabilities of these standards, such as remote
 > image layer rebasing on Docker API v2 registries.
 
-**Note**: This Buildpack v3 template is distinct from Buildpack.
+**Note**: The current Cloud Foundry buildpacks are available in the [CF template](README-CF.md).
 
 ## Create the template
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/buildpack_v3/template.yaml
+kubectl apply -f https://raw.githubusercontent.com/knative/build-templates/master/buildpacks/cnb.yaml
 ```
 
 ## Parameters
 
-* **IMAGE:** The Docker image name to apply to the newly built image.
-    (_required_)
-* **RUN_IMAGE:** The run image buildpacks will use as the base for IMAGE.
-* **USE_CREDENTIAL_HELPERS:** Use Docker credential helpers. Set to `"true"` or `"false"` as string values.
+* **IMAGE:** The Docker image name to apply to the newly built image. (_required_)
+* **RUN_IMAGE:** The run image buildpacks will use as the base for IMAGE. (_default:_ `packs/run`)
+* **USE_CRED_HELPERS:** Use Docker credential helpers. Set to `"true"` or `"false"` as string values. (_default:_ `"true"`)
 
 ## Usage
 
@@ -38,7 +37,7 @@ spec:
       url: https://github.com/my-user/my-repo
       revision: master
   template:
-    name: buildpackv3
+    name: cnb
     arguments:
     - name: IMAGE
       value: us.gcr.io/my-project/my-app
